@@ -1,0 +1,1033 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: #f1f5f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+h2 {
+  font-size: 1.3rem;
+  color: #0f172a;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tab-group {
+  display: flex;
+  background: #e2e8f0;
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: #ffffff;
+  color: #2563eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.upload-area {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  background: #f8fafc;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-area:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.upload-content svg {
+  stroke: #2563eb;
+}
+
+#preview-img {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.camera-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#webcam {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scanner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.scan-box {
+  width: 130px;
+  height: 130px;
+  border: 3px solid #38bdf8;
+  border-radius: 12px;
+  box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.3);
+}
+
+.status-msg {
+  margin-top: 14px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.status-msg.success { background: #dcfce7; color: #15803d; }
+.status-msg.warning { background: #fef9c3; color: #a16207; }
+.status-msg.error { background: #fee2e2; color: #b91c1c; }
+
+.hidden { display: none !important; }
+
+.form-group {
+  margin-top: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 4px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+input[type="number"], input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+input[type="number"] {
+  padding-left: 32px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 0.75rem;
+  font-family: monospace;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  resize: none;
+}
+
+.btn-reset {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-reset:hover { background: #1d4ed8; }
+
+/* =========================================================
+   ACTION BUTTONS CONTAINER STYLES
+========================================================= */
+
+.action-controls-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background: var(--accent-gold, #f0b90b);
+    color: #0b0e11;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9rem;
+    flex: 1;
+    transition: opacity 0.2s ease;
+}
+
+.btn-primary:hover {
+    opacity: 0.85;
+}
+
+/* =========================================================
+   ENHANCED ACTION BUTTONS CONSOLE STYLES
+========================================================= */
+
+.action-controls-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+/* Primary Confirm Payment Button Style */
+.btn-primary-pay {
+    background: linear-gradient(135deg, #0ecb81 0%, #059669 100%);
+    color: #ffffff;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.95rem;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(14, 203, 129, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-primary-pay:hover {
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(14, 203, 129, 0.4);
+}
+
+/* Secondary Reset / Clear Button Style */
+.btn-secondary-reset {
+    background: transparent;
+    color: #848e9c;
+    border: 1px solid #2b313a;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary-reset:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #eaecef;
+    border-color: #848e9c;
+}
+
+/* =========================================================
+   SOLID YELLOW CONFIRM PAYMENT BUTTON STYLES
+========================================================= */
+
+.action-controls-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+/* Solid Yellow Cover Payment Button */
+.btn-yellow-pay {
+    background-color: #f0b90b;
+    color: #0b0e11;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.95rem;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(240, 185, 11, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-yellow-pay:hover {
+    background-color: #fcd535;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(240, 185, 11, 0.4);
+}
+
+/* =========================================================
+   GOOGLE TRANSLATE WIDGET STYLING
+========================================================= */
+
+.translate-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.goog-te-combo {
+    background-color: #181a20 !important;
+    color: #eaecef !important;
+    border: 1px solid #2b313a !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    font-size: 0.9rem !important;
+    outline: none !important;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Hide Google banner frame top bar */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+}
+
+/* =========================================================
+   HUOKAING THARA - BANK QR SCANNER STYLESHEET
+========================================================= */
+
+:root {
+    --bg-main: #0b0e11;
+    --bg-card: #181a20;
+    --border-color: #2b313a;
+    --accent-gold: #f0b90b;
+    --accent-yellow-hover: #fcd535;
+    --text-primary: #eaecef;
+    --text-secondary: #848e9c;
+    --success-color: #0ecb81;
+    --error-color: #f6465d;
+}
+
+/* Enhanced Background & Viewport Centering */
+body {
+    background-color: var(--bg-main);
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(240, 185, 11, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.03) 0%, transparent 40%);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Main Card Container */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin: 0 0 5px 0;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 20px 0;
+}
+
+/* Google Translate Widget Styling */
+.translate-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.goog-te-combo {
+    background-color: var(--bg-main) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    font-size: 0.9rem !important;
+    outline: none !important;
+    cursor: pointer;
+    width: 100%;
+}
+
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+/* Mode Selector Tabs */
+.tab-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: var(--bg-main);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    background: var(--accent-gold);
+    color: var(--bg-main);
+    border-color: var(--accent-gold);
+}
+
+/* View Sections */
+.view-section.hidden {
+    display: none;
+}
+
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.01);
+    transition: border-color 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.upload-area:hover {
+    border-color: var(--accent-gold);
+}
+
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+}
+
+.upload-content svg {
+    stroke: var(--text-secondary);
+}
+
+#preview-img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+/* Camera Wrapper */
+.camera-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    margin-bottom: 20px;
+}
+
+#webcam {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.scanner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.scan-box {
+    width: 200px;
+    height: 200px;
+    border: 2px solid var(--accent-gold);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(240, 185, 11, 0.4);
+}
+
+/* Form Groups & Inputs */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.currency-symbol {
+    padding: 0 12px;
+    color: var(--accent-gold);
+    font-weight: bold;
+}
+
+input[type="number"], input[type="text"], textarea {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.95kr;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-wrapper input {
+    border: none;
+    background: transparent;
+}
+
+input[type="number"]:focus, input[type="text"]:focus, textarea:focus {
+    border-color: var(--accent-gold);
+}
+
+textarea {
+    resize: none;
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
+/* Status Message */
+.status-msg {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.status-msg.hidden {
+    display: none;
+}
+
+.status-msg.success {
+    background: rgba(14, 203, 129, 0.15);
+    color: var(--success-color);
+    border: 1px solid rgba(14, 203, 129, 0.3);
+}
+
+.status-msg.error {
+    background: rgba(246, 70, 93, 0.15);
+    color: var(--error-color);
+    border: 1px solid rgba(246, 70, 93, 0.3);
+}
+
+.status-msg.warning {
+    background: rgba(240, 185, 11, 0.15);
+    color: var(--accent-gold);
+    border: 1px solid rgba(240, 185, 11, 0.3);
+}
+
+/* Action Controls Row */
+.action-controls-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.btn-yellow-pay {
+    background-color: var(--accent-gold);
+    color: var(--bg-main);
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9rem;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(240, 185, 11, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-yellow-pay:hover {
+    background-color: var(--accent-yellow-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(240, 185, 11, 0.4);
+}
+
+.btn-secondary-reset {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary-reset:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+/* =========================================================
+   HUOKAING THARA - FULL RESPONSIVE QR SCANNER STYLESHEET
+========================================================= */
+
+:root {
+    --bg-main: #0b0e11;
+    --bg-card: #181a20;
+    --border-color: #2b313a;
+    --accent-gold: #f0b90b;
+    --accent-yellow-hover: #fcd535;
+    --text-primary: #eaecef;
+    --text-secondary: #848e9c;
+    --success-color: #0ecb81;
+    --error-color: #f6465d;
+}
+
+/* Global Full-Size Layout */
+body {
+    background-color: var(--bg-main);
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(240, 185, 11, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.04) 0%, transparent 45%);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 15px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Main Adaptive Card Container (Optimized for Android & Desktop) */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    max-width: 540px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .card {
+        padding: 36px;
+        max-width: 580px;
+    }
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    margin: 0 0 4px 0;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+}
+
+/* Google Translate Widget Styling */
+.translate-container {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.goog-te-combo {
+    background-color: var(--bg-main) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 10px 14px !important;
+    border-radius: 8px !important;
+    font-size: 0.9rem !important;
+    outline: none !important;
+    cursor: pointer;
+    width: 100%;
+}
+
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+/* Mode Selector Tabs */
+.tab-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: var(--bg-main);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    background: var(--accent-gold);
+    color: var(--bg-main);
+    border-color: var(--accent-gold);
+}
+
+/* View Sections */
+.view-section.hidden {
+    display: none;
+}
+
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.01);
+    transition: border-color 0.2s ease;
+    margin-bottom: 16px;
+}
+
+.upload-area:hover {
+    border-color: var(--accent-gold);
+}
+
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.upload-content svg {
+    stroke: var(--text-secondary);
+}
+
+#preview-img {
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+/* Camera Wrapper & Android Responsive Sizing */
+.camera-wrapper {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+    .camera-wrapper {
+        height: 320px;
+    }
+}
+
+#webcam {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.scanner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.scan-box {
+    width: 180px;
+    height: 180px;
+    border: 2px solid var(--accent-gold);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(240, 185, 11, 0.4);
+}
+
+/* Form Groups & Inputs */
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.currency-symbol {
+    padding: 0 12px;
+    color: var(--accent-gold);
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+input[type="number"], input[type="text"], textarea {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-wrapper input {
+    border: none;
+    background: transparent;
+}
+
+input[type="number"]:focus, input[type="text"]:focus, textarea:focus {
+    border-color: var(--accent-gold);
+}
+
+textarea {
+    resize: none;
+    font-family: monospace;
+    font-size: 0.8rem;
+    height: 60px;
+}
+
+/* Status Message */
+.status-msg {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.status-msg.hidden {
+    display: none;
+}
+
+.status-msg.success {
+    background: rgba(14, 203, 129, 0.15);
+    color: var(--success-color);
+    border: 1px solid rgba(14, 203, 129, 0.3);
+}
+
+.status-msg.error {
+    background: rgba(246, 70, 93, 0.15);
+    color: var(--error-color);
+    border: 1px solid rgba(246, 70, 93, 0.3);
+}
+
+.status-msg.warning {
+    background: rgba(240, 185, 11, 0.15);
+    color: var(--accent-gold);
+    border: 1px solid rgba(240, 185, 11, 0.3);
+}
+
+/* Action Controls Row (Optimized Touch targets for Android & Desktop) */
+.action-controls-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+    width: 100%;
+}
+
+.btn-yellow-pay {
+    background-color: var(--accent-gold);
+    color: var(--bg-main);
+    border: none;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.95rem;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(240, 185, 11, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-yellow-pay:hover {
+    background-color: var(--accent-yellow-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(240, 185, 11, 0.4);
+}
+
+.btn-secondary-reset {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary-reset:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
